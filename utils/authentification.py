@@ -39,11 +39,11 @@ def get_value(dom, name):
         if found == 0:
             raise Exception("xml document not conform - please contact the admin")
     else:
-        real_node = node[0]
+        real_node = nodes[0]
     return escape(get_text(real_node.childNodes))
 
 def parse_user(raw):
-    dom = parseString(infos)
+    dom = parseString(raw)
     return {
         'ip': get_value(dom, "ipAddress"),
         'username': get_value(dom, "username"),
@@ -72,8 +72,8 @@ def create_user(values):
     user_profile.save()
     return user
 
-def throw_b64error(raw):
-    msg = b64encode(infos)
+def throw_b64error(request, raw):
+    msg = b64encode(raw)
     msg = [ msg[y * 78:(y+1)*78] for y in xrange((len(msg)/78) +1) ]
     return render_to_response('error.tpl', {'msg': "\n".join(msg)},
                               context_instance=RequestContext(request))
@@ -93,7 +93,7 @@ def intra_auth(request):
             values = parse_user(infos)
             user = create_user(values)
         except:
-            throw_b64error(infos)
+            return throw_b64error(request, infos)
 
         user.backend = 'django.contrib.auth.backends.ModelBackend' 
         login(request, user)

@@ -40,10 +40,10 @@ class Page(models.Model):
         return content
 
     def get_content(self):
-        return self.get_file(self.filename)
+        return self.get_file(self.filename.replace('project402','p402'))
 
     def get_mini(self):
-        return self.get_file(self.mininame)
+        return self.get_file(self.mininame.replace('project402','p402'))
 
 class Document(models.Model):
     name = models.TextField()

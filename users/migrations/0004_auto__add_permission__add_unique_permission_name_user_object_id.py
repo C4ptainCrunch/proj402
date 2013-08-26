@@ -140,7 +140,6 @@ class Migration(SchemaMigration):
         },
         'users.permission': {
             'Meta': {'unique_together': "(('name', 'user', 'object_id'),)", 'object_name': 'Permission'},
-            'content_type': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'ct'", 'null': 'True', 'to': "orm['contenttypes.ContentType']"}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '80'}),
             'object_id': ('django.db.models.fields.PositiveIntegerField', [], {'null': 'True'}),

@@ -81,7 +81,7 @@ class UploadEvent(BaseEvent):
     document = models.ForeignKey('documents.Document', null=True)
 
     def __str__(self):
-        return "%s uploaded a new document %s" % (self.user.username, 
+        return "%s %s uploaded a new document %s" % (self.user.first_name, self.user.last_name, 
                                                   self.document.name)
     
     def _url(self):
@@ -94,7 +94,7 @@ class ThreadEvent(BaseEvent):
     thread = models.ForeignKey('messages.Thread', null=True)
 
     def __str__(self):
-        return "%s opened a new thread about %s" % (self.user.username,
+        return "%s %s opened a new thread about %s" % (self.user.first_name, self.user.last_name,
                                                     self.thread.subject)
     
     def _url(self):
@@ -107,7 +107,7 @@ class ReplyEvent(BaseEvent):
     thread = models.ForeignKey('messages.Thread', null=True)
 
     def __str__(self):
-        return "%s replied to the thread about %s" % (self.user.username,
+        return "%s %s replied to the thread about %s" % (self.user.first_name, self.user.last_name,
                                                       self.thread.subject)
 
     def _url(self):

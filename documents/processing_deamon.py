@@ -83,10 +83,10 @@ def parse_file(doc, upfile):
     doc.set_npages(pdf.numPages)
 
     # activate the search system
-    system("pdftotext " + filename)
-    words = open("%s/%s/%04d.txt" % (UPLOAD_DIR, doc.refer.slug, doc.id), 'r')
-    doc.set_wsize(extract_words(doc, words.read()))
-    words.close()
+    #system("pdftotext " + filename)
+    #words = open("%s/%s/%04d.txt" % (UPLOAD_DIR, doc.refer.slug, doc.id), 'r')
+    #doc.set_wsize(extract_words(doc, words.read()))
+    #words.close()
 
     # iteration page a page, transform en png + get page size
     for num, page in zip(xrange(pdf.numPages), pdf.pages):

@@ -78,7 +78,6 @@ eventually find something interesting. You can come back on this page with the
 <h2>{% trans "Courses followed" %}</h2>
 {% with courses=user.profile.courses.all %}
 {% if courses %}
-
 <table class="sortable" id="courses">
 	<thead><tr>
 		<th>{% trans "Course" %}</th>
