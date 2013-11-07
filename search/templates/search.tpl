@@ -9,26 +9,25 @@
 # your option) any later version.
 
 {% endcomment %}
-<p><strong>{% trans "This feature is not yet functionnal!" %}</strong></p>
-
 {% if msg %}
 <p>{{ msg }}</p>
 
 {% else %}
 
-{% if rejected %}
-<p><strong>{% trans "Rejected" %}</strong> : {{ rejected|join:', ' }}</p>
-{% endif %}
+<p><strong>Search: {{ query }}</strong></p>
 
-<table style="border-collapse:collapse;">
-<tr><th style="width: 100px;">{% trans "Word" %}</th><th>{% trans "Present in" %}</th></tr>
-
-{% for word, docs in word_list %}
-<tr><td style="text-align: center; border-top: 1px solid black; border-right: 1px solid black">{{ word }}</td>
-    <td style="border-top: 1px solid black; padding: 8px">{% for id, count, wsize, score in docs %}
-          Doc #{{id}}, score = {{ score }}, {{ count }}/{{ wsize }}<br>
-        {% endfor %}</td></tr>
+{% for doc in docs %}
+	<div style="margin: 5px;">
+		<p><a href="{% url view_file doc.id %}" onclick="return Iload('{% url view_file doc.id %}');">
+			<strong>{{ doc.name }}</strong>
+		</a><br>
+		<i>{% if doc.description %}{{ doc.description }}{% else %}<span style="color: #888">Still no description..</span>{% endif %}</i><br>
+		<small>Uploaded by <i>{{ doc.owner.first_name }} {{ doc.owner.last_name }}</i> in 
+		       <a href="{% url course_show doc.refer.slug %}"
+			  onclick="return Iload('{% url course_show doc.refer.slug %}');">
+			{{ doc.refer.name }}</a></small>
+	</div>
 {% endfor %}
-</table>
 
 {% endif %}
+
